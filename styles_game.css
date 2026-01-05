@@ -1,0 +1,27 @@
+:root{
+  --game-cannon: #999;
+  --game-target: #0af;
+  --game-target-hit: #ff0;
+  --game-preview: rgba(255,255,255,0.6);
+  --game-preview-marker: #ff8;
+  --game-ball: #f55;
+  --game-ground: #444;
+  --game-wall: #666;
+  --game-hud: #ddd;
+
+  --game-line-dash: 6 6;
+
+  --game-hud-font: 14px Arial, sans-serif;
+
+  --game-cannon-radius: 14px;
+  --game-preview-marker-radius: 6px;
+}
+
+.theme-dark { --game-target: #0af; --game-ball: #f55; }
+.theme-light { --game-target: #0077cc; --game-ball: #c33; --game-hud: #222; }
+
+.canvas-overlay {
+  pointer-events: none;
+}
+
+.control-group button:hover { filter:brightness(1.08); }

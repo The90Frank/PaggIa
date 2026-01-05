@@ -1,0 +1,4 @@
+# Ignore vendor files in the web root
+/node_modules
+/public/assets/vendor
+.bower_components
