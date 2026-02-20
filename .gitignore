@@ -1,4 +1,16 @@
-# Ignore vendor files in the web root
+# IDE and editor settings
+.vscode/
+.claude/
+.idea/
+*.swp
+*.swo
+*~
+
+# Vendor files
 /node_modules
 /public/assets/vendor
 .bower_components
+
+# OS files
+.DS_Store
+Thumbs.db
