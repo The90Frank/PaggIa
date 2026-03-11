@@ -1,25 +1,90 @@
+<!--
+  index.html — Landing page di PaggIa.
+
+  Mostra due card link: Game e Editor.
+  Non contiene logica JS, solo navigazione.
+
+  STRUTTURA:
+    .landing                → container centrato verticalmente
+      h1                    → titolo "PaggIa"
+      .landing-cards        → flex row con card
+        .landing-card (×2)  → link a game.html e editor.html
+          .icon             → emoji
+          .label            → nome pagina
+          .desc             → descrizione breve
+
+  CSS: styles.css (base) + inline <style> per layout landing
+-->
 <!doctype html>
 <html lang="it">
 <head>
   <meta charset="utf-8" />
   <title>PaggIa</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-      <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet" href="./styles_game.css">
+  <link rel="stylesheet" href="./styles.css">
+  <style>
+    /* Layout landing page — centrato verticalmente */
+    .landing {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+      gap: 32px;
+    }
+    .landing h1 {
+      font-size: 2.4rem;
+      color: var(--accent);
+      margin: 0;
+    }
+    /* Card container — flex row, wrap su mobile */
+    .landing-cards {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    /* Singola card — link a Game o Editor */
+    .landing-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 32px 40px;
+      border-radius: 12px;
+      border: 1px solid var(--panel-border);
+      background: rgba(255,255,255,0.02);
+      text-decoration: none;
+      color: #fff;
+      transition: border-color 0.2s, background 0.2s;
+      min-width: 180px;
+    }
+    .landing-card:hover {
+      border-color: var(--accent);
+      background: rgba(0,170,255,0.06);
+    }
+    .landing-card .icon { font-size: 2.2rem; }
+    .landing-card .label { font-size: 1.1rem; font-weight: 600; }
+    .landing-card .desc { font-size: 0.82rem; color: var(--muted); text-align: center; }
+  </style>
 </head>
 <body>
-  <div class="wrap">
-
-    <div id="controls" class="controls"></div>
-
-    <div class="status" id="status">Pronto</div>
-
-    <canvas id="gameCanvas"></canvas>
-
+  <div class="landing">
+    <h1>PaggIa</h1>
+    <div class="landing-cards">
+      <!-- Card Game -->
+      <a class="landing-card" href="./game.html">
+        <span class="icon">&#127918;</span>
+        <span class="label">Game</span>
+        <span class="desc">Gioca con la mappa di default o importa una mappa via base64</span>
+      </a>
+      <!-- Card Editor -->
+      <a class="landing-card" href="./editor.html">
+        <span class="icon">&#9998;</span>
+        <span class="label">Editor</span>
+        <span class="desc">Crea e configura mappe, esporta come base64</span>
+      </a>
+    </div>
   </div>
-
-  <script type="module">
-    import './logic.js';
-  </script>
 </body>
 </html>

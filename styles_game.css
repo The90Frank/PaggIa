@@ -1,3 +1,29 @@
+/*
+ * styles_game.css — Variabili CSS per il rendering del gioco.
+ *
+ * Queste custom properties sono lette da game.js (getGameStyleVars)
+ * per configurare i colori del canvas senza hardcodarli nel JS.
+ *
+ * Supporta temi: .theme-dark (default) e .theme-light.
+ *
+ * VARIABILI:
+ *   --game-cannon          → colore cannone (#999)
+ *   --game-target          → colore target base (#0af azzurro)
+ *   --game-target-hit      → colore flash quando colpito (#ff0 giallo)
+ *   --game-preview         → colore linea preview traiettoria
+ *   --game-preview-marker  → colore marker rimbalzo sulla preview
+ *   --game-ball            → colore pallina (#f55 rosso)
+ *   --game-ground          → colore linea ground
+ *   --game-wall            → colore linee pareti/soffitto
+ *   --game-hud             → colore testo HUD (tiri/score)
+ *   --game-line-dash       → pattern tratteggio preview (6 6)
+ *   --game-hud-font        → font HUD
+ *   --game-cannon-radius   → non usata (raggio hardcodato 14 in JS)
+ *   --game-preview-marker-radius → non usata (hardcodato 6 in JS)
+ *
+ * USATO DA: game.html (tramite game.js)
+ */
+
 :root{
   --game-cannon: #999;
   --game-target: #0af;
@@ -17,9 +43,12 @@
   --game-preview-marker-radius: 6px;
 }
 
+/* Tema scuro (default) */
 .theme-dark { --game-target: #0af; --game-ball: #f55; }
+/* Tema chiaro (non attivo di default) */
 .theme-light { --game-target: #0077cc; --game-ball: #c33; --game-hud: #222; }
 
+/* Overlay canvas (non usato attualmente) */
 .canvas-overlay {
   pointer-events: none;
 }

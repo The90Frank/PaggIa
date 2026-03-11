@@ -1,12 +1,31 @@
+/*
+ * styles.css — Stili base condivisi da tutte le pagine (landing, game, editor).
+ *
+ * Definisce:
+ *   - CSS custom properties (variabili colore, font)
+ *   - Reset e stili globali (body, html)
+ *   - .wrap (container centrato per game e landing)
+ *   - Titoli h2
+ *   - Canvas (background scuro, bordo, touch-action)
+ *   - .controls / .control-group (non usati attualmente, legacy)
+ *   - Input number/range, button, label (stili base form)
+ *   - .small, .status (testo muted)
+ *   - Responsive ≤720px
+ *
+ * USATO DA: index.html, game.html, editor.html
+ */
+
+/* --- Variabili globali --- */
 :root{
-  --ui-bg: #0b0b0b;
-  --panel-bg: #111;
-  --panel-border: #222;
-  --muted: #ccc;
-  --accent: #0af;
+  --ui-bg: #0b0b0b;         /* Background pagina */
+  --panel-bg: #111;          /* Background canvas/pannelli */
+  --panel-border: #222;      /* Bordo pannelli/canvas */
+  --muted: #ccc;             /* Testo secondario */
+  --accent: #0af;            /* Colore accent (azzurro) */
   --font-family: "Arial", "Helvetica", sans-serif;
 }
 
+/* --- Reset e globali --- */
 html,body{
   height:100%;
   margin:0;
@@ -17,6 +36,7 @@ html,body{
   -moz-osx-font-smoothing:grayscale;
 }
 
+/* Container centrato (usato da game.html e landing) */
 .wrap{
   max-width:1200px;
   margin:18px auto;
@@ -31,6 +51,7 @@ h2{
   color:var(--muted);
 }
 
+/* Canvas: sfondo scuro, centrato, no touch scroll */
 canvas{
   background:var(--panel-bg);
   display:block;
@@ -40,6 +61,7 @@ canvas{
   touch-action: none;
 }
 
+/* --- Controls (legacy, non usati attualmente) --- */
 .controls{
   display:flex;
   gap:12px;
@@ -64,6 +86,7 @@ canvas{
   justify-content:center;
 }
 
+/* --- Form elements base --- */
 label{
   display:block;
   font-size:0.85rem;
@@ -94,10 +117,12 @@ button{
   cursor:pointer;
 }
 
+/* --- Utility classes --- */
 .small{ font-size:0.9rem; color:var(--muted); }
 
 .status{ color:var(--muted); margin-bottom:6px; }
 
+/* --- Responsive --- */
 @media (max-width:720px){
   .controls{ flex-direction:column; align-items:center; }
   .control-group{ width:92%; max-width:420px; }

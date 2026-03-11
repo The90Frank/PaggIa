@@ -1,0 +1,95 @@
+<!--
+  game.html — Pagina di gioco PaggIa.
+
+  Carica la mappa da map.json (default) e permette import via base64.
+  Il giocatore punta e spara palline cliccando sul canvas.
+
+  STRUTTURA:
+    .wrap                  → container centrato
+      .game-header         → titolo + link editor
+      .import-section      → textarea base64 + bottone "Carica mappa"
+      #status              → barra di stato ("Pronto", "Animazione in corso", ecc.)
+      #gameCanvas          → canvas di gioco (dimensioni da mappa, default 1000×560)
+
+  CSS: styles.css (base) + styles_game.css (variabili colori gioco) + inline <style>
+  JS:  game.js (ES module)
+-->
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <title>PaggIa – Game</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles_game.css">
+  <style>
+    /* Header con titolo e link all'editor */
+    .game-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .game-header a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+    .game-header a:hover { text-decoration: underline; }
+
+    /* Sezione import base64: textarea + bottone */
+    .import-section {
+      max-width: 700px;
+      margin: 0 auto 12px auto;
+      display: flex;
+      gap: 8px;
+      align-items: stretch;
+    }
+    .import-section textarea {
+      flex: 1;
+      min-height: 38px;
+      max-height: 80px;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #333;
+      background: transparent;
+      color: #fff;
+      font-family: monospace;
+      font-size: 0.8rem;
+      resize: vertical;
+    }
+    .import-section textarea::placeholder { color: #555; }
+    .import-section button {
+      white-space: nowrap;
+      padding: 8px 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <div class="game-header">
+      <h2>PaggIa</h2>
+      <a href="./editor.html">Apri Editor</a>
+    </div>
+
+    <!-- Import base64: incolla qui il base64 di una mappa esportata dall'editor -->
+    <div class="import-section">
+      <textarea id="base64Input" placeholder="Incolla qui il base64 di una mappa per caricarla…"></textarea>
+      <button id="loadBase64Btn">Carica mappa</button>
+    </div>
+
+    <!-- Status bar: mostra lo stato corrente del gioco -->
+    <div class="status" id="status">Pronto</div>
+
+    <!-- Canvas di gioco: dimensioni impostate da JS (applyMapData) -->
+    <canvas id="gameCanvas"></canvas>
+
+  </div>
+
+  <script type="module">
+    import './game.js';
+  </script>
+</body>
+</html>

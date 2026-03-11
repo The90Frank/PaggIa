@@ -11,7 +11,17 @@
   },
   "targets": [
     { "shape": "circle", "x": 150, "y": 360, "r": 18 },
-    { "shape": "circle", "x": 230, "y": 360, "r": 18 },
+    { "shape": "circle", "x": 230, "y": 360, "r": 18,
+      "motion": {
+        "segments": [
+          { "cp1": { "x": 280, "y": 280 }, "cp2": { "x": 380, "y": 280 }, "end": { "x": 430, "y": 360 } }
+        ],
+        "duration": 2.5,
+        "easeIn": 0.25,
+        "easeOut": 0.25,
+        "teleport": false
+      }
+    },
     { "shape": "rect", "x": 420, "y": 340, "width": 80, "height": 36, "angle": 12 },
     { "shape": "rect", "x": 620, "y": 320, "width": 120, "height": 28, "angle": -22 },
     { "shape": "circle", "x": 800, "y": 360, "r": 18 }

@@ -1,0 +1,205 @@
+<!--
+  editor.html — Editor visuale per mappe PaggIa.
+
+  Layout a due colonne: canvas a sinistra, sidebar con pannelli a destra.
+  Permette di inserire target (cerchio/rettangolo), configurare parametri,
+  editare traiettorie Bezier visualmente, e esportare come base64.
+
+  STRUTTURA:
+    .editor-layout             → flex row (canvas | sidebar)
+      .editor-canvas-area      → canvas + header + hint
+        #editorCanvas          → canvas interattivo (click=piazza, drag=muovi)
+      .editor-sidebar          → pannelli collapsabili (<details>)
+        Parametri Canvas       → larghezza, altezza
+        Fisica                 → gravità, restitution
+        Pallina                → raggio, velocità
+        Gioco                  → timeScale, samples, maxBounces, tiri
+        Aggiungi Target        → tipo (cerchio/rect) + parametri forma
+        Movimento Target #N    → abilita, durata, ease, teleport, closedPath, segmenti Bezier
+        Targets (N)            → lista target con selezione e delete
+        Base64 Output          → textarea readonly + copia/importa
+
+  PANNELLO MOTION (visibile solo con target selezionato):
+    #motionEnabled    → checkbox abilita/disabilita moto
+    #motionFields     → contenitore campi (nascosto se disabilitato)
+      #motionDuration → durata traversata (secondi)
+      #motionEaseIn   → frazione accelerazione (0-0.5)
+      #motionEaseOut  → frazione decelerazione (0-0.5)
+      #motionTeleport → checkbox teletrasporto vs ping-pong
+      #motionClosedPath → checkbox chiudi percorso (end ultimo seg = punto iniziale)
+      #motionSegmentsList → container segmenti Bezier (generati da JS)
+      #addSegmentBtn  → bottone aggiungi segmento
+
+  CSS: styles.css (base) + styles_game.css (variabili) + styles_editor.css (layout editor)
+  JS:  editor.js (ES module)
+-->
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <title>PaggIa – Editor</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles_game.css">
+  <link rel="stylesheet" href="./styles_editor.css">
+</head>
+<body>
+  <div class="editor-layout">
+
+    <!-- Colonna sinistra: canvas preview interattivo -->
+    <div class="editor-canvas-area">
+      <div class="editor-header">
+        <h2>PaggIa Editor</h2>
+        <a href="./game.html">Vai al Game</a>
+      </div>
+      <canvas id="editorCanvas"></canvas>
+      <div class="canvas-hint">Clicca sul canvas per posizionare un target</div>
+    </div>
+
+    <!-- Colonna destra: sidebar con pannelli di configurazione -->
+    <div class="editor-sidebar">
+
+      <!-- Parametri dimensione canvas -->
+      <details class="editor-section" open>
+        <summary>Parametri Canvas</summary>
+        <div class="field-row">
+          <label>Larghezza</label><input id="canvasW" type="number" value="1000" min="400" max="1600">
+        </div>
+        <div class="field-row">
+          <label>Altezza</label><input id="canvasH" type="number" value="560" min="300" max="1000">
+        </div>
+      </details>
+
+      <!-- Parametri fisici -->
+      <details class="editor-section" open>
+        <summary>Fisica</summary>
+        <div class="field-row">
+          <label>Gravità</label><input id="gravity" type="number" value="980">
+        </div>
+        <div class="field-row">
+          <label>Restitution</label><input id="restitution" type="number" step="0.01" value="0.8">
+        </div>
+      </details>
+
+      <!-- Parametri pallina -->
+      <details class="editor-section" open>
+        <summary>Pallina</summary>
+        <div class="field-row">
+          <label>Raggio</label><input id="ballRadius" type="number" value="10">
+        </div>
+        <div class="field-row">
+          <label>Velocità</label><input id="defaultSpeed" type="number" value="700">
+        </div>
+      </details>
+
+      <!-- Parametri di gioco -->
+      <details class="editor-section" open>
+        <summary>Gioco</summary>
+        <div class="field-row">
+          <label>TimeScale</label><input id="timeScale" type="number" step="0.1" value="1">
+        </div>
+        <div class="field-row">
+          <label>Samples</label><input id="samples" type="number" value="400">
+        </div>
+        <div class="field-row">
+          <label>Max Bounces (0 = illimitato)</label><input id="maxBounces" type="number" min="0" value="0">
+        </div>
+        <div class="field-row">
+          <label>Tiri totali</label><input id="shotsTotal" type="number" min="1" value="10">
+        </div>
+      </details>
+
+      <!-- Aggiungi target: selezione tipo + parametri forma -->
+      <details class="editor-section" open>
+        <summary>Aggiungi Target</summary>
+        <div class="field-row">
+          <label>Tipo</label>
+          <select id="newTargetShape">
+            <option value="circle">Cerchio</option>
+            <option value="rect">Rettangolo</option>
+          </select>
+        </div>
+        <!-- Campi cerchio (default visibile) -->
+        <div id="circleFields">
+          <div class="field-row">
+            <label>Raggio</label><input id="newCircleR" type="number" value="18" min="5">
+          </div>
+        </div>
+        <!-- Campi rettangolo (nascosti di default, toggle da JS) -->
+        <div id="rectFields" style="display:none">
+          <div class="field-row">
+            <label>Larghezza</label><input id="newRectW" type="number" value="80" min="10">
+          </div>
+          <div class="field-row">
+            <label>Altezza</label><input id="newRectH" type="number" value="36" min="10">
+          </div>
+          <div class="field-row">
+            <label>Angolo (°)</label><input id="newRectAngle" type="number" value="0">
+          </div>
+        </div>
+        <button id="addTargetBtn" class="btn-primary">+ Aggiungi al centro</button>
+      </details>
+
+      <!--
+        Pannello Movimento: visibile solo quando un target è selezionato.
+        Nascosto/mostrato da editor.js (showMotionPanel).
+        Contiene: abilita, durata, easing, teleport, closedPath, lista segmenti Bezier.
+      -->
+      <details class="editor-section" id="motionSection" style="display:none" open>
+        <summary>Movimento Target #<span id="motionTargetIdx">-</span></summary>
+        <div class="field-row">
+          <label>Abilita moto</label>
+          <input id="motionEnabled" type="checkbox">
+        </div>
+        <!-- Campi motion (nascosti se moto disabilitato) -->
+        <div id="motionFields" style="display:none">
+          <div class="field-row">
+            <label>Durata (s)</label><input id="motionDuration" type="number" step="0.1" min="0.1" value="2.0">
+          </div>
+          <div class="field-row">
+            <label>Ease In</label><input id="motionEaseIn" type="number" step="0.05" min="0" max="0.5" value="0.25">
+          </div>
+          <div class="field-row">
+            <label>Ease Out</label><input id="motionEaseOut" type="number" step="0.05" min="0" max="0.5" value="0.25">
+          </div>
+          <div class="field-row">
+            <label>Teleport</label>
+            <input id="motionTeleport" type="checkbox">
+          </div>
+          <!-- Chiudi percorso: forza end ultimo segmento = posizione iniziale target -->
+          <div class="field-row">
+            <label>Chiudi percorso</label>
+            <input id="motionClosedPath" type="checkbox">
+          </div>
+          <div class="small" style="margin:8px 0 4px">Segmenti Bezier</div>
+          <!-- Container segmenti: popolato dinamicamente da editor.js (renderMotionSegments) -->
+          <div id="motionSegmentsList"></div>
+          <button id="addSegmentBtn" class="btn-primary">+ Aggiungi segmento</button>
+        </div>
+      </details>
+
+      <!-- Lista target: click=seleziona, ×=elimina, ~ indica motion attivo -->
+      <details class="editor-section" open>
+        <summary>Targets (<span id="targetCount">0</span>)</summary>
+        <div id="targetList" class="target-list"></div>
+        <button id="clearAllTargets" class="btn-danger">Rimuovi tutti</button>
+      </details>
+
+      <!-- Base64 output: textarea readonly aggiornata in tempo reale -->
+      <details class="editor-section" open>
+        <summary>Base64 Output</summary>
+        <textarea id="base64Output" readonly rows="4"></textarea>
+        <div class="field-row" style="gap:6px">
+          <button id="copyBase64Btn" class="btn-primary">Copia</button>
+          <button id="importBase64Btn">Importa base64</button>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <script type="module">
+    import './editor.js';
+  </script>
+</body>
+</html>
