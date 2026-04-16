@@ -1,0 +1,235 @@
+{
+  "canvas": {
+    "width": 1000,
+    "height": 560
+  },
+  "params": {
+    "gravity": 980,
+    "restitution": 0.75,
+    "ballRadius": 10,
+    "defaultSpeed": 700,
+    "timeScale": 1,
+    "samples": 400,
+    "shotsTotal": 12
+  },
+  "targets": [
+    {
+      "shape": "circle",
+      "x": 500,
+      "y": 180,
+      "r": 12,
+      "special": true
+    },
+    {
+      "shape": "circle",
+      "x": 445,
+      "y": 230,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 500,
+      "y": 230,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 555,
+      "y": 230,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 390,
+      "y": 280,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 445,
+      "y": 280,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 500,
+      "y": 280,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 555,
+      "y": 280,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 610,
+      "y": 280,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 335,
+      "y": 330,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 390,
+      "y": 330,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 445,
+      "y": 330,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 500,
+      "y": 330,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 555,
+      "y": 330,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 610,
+      "y": 330,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 665,
+      "y": 330,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 280,
+      "y": 380,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 335,
+      "y": 380,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 390,
+      "y": 380,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 445,
+      "y": 380,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 500,
+      "y": 380,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 555,
+      "y": 380,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 610,
+      "y": 380,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 665,
+      "y": 380,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 720,
+      "y": 380,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 225,
+      "y": 430,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 280,
+      "y": 430,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 335,
+      "y": 430,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 390,
+      "y": 430,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 445,
+      "y": 430,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 500,
+      "y": 430,
+      "r": 12,
+      "special": true
+    },
+    {
+      "shape": "circle",
+      "x": 555,
+      "y": 430,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 610,
+      "y": 430,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 665,
+      "y": 430,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 720,
+      "y": 430,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 775,
+      "y": 430,
+      "r": 12
+    }
+  ]
+}

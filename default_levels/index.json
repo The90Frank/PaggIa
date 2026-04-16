@@ -1,0 +1,22 @@
+{
+  "levels": [
+    {
+      "id": "classico",
+      "name": "Classico",
+      "file": "classico.json",
+      "desc": "5 file orizzontali di pallini, stile Peggle base"
+    },
+    {
+      "id": "gufo",
+      "name": "Gufo",
+      "file": "gufo.json",
+      "desc": "Due archi a forma di occhi con cluster centrale"
+    },
+    {
+      "id": "triangolo",
+      "name": "Triangolo",
+      "file": "triangolo.json",
+      "desc": "Piramide triangolare di 36 pallini"
+    }
+  ]
+}

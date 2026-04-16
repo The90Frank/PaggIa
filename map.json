@@ -10,7 +10,7 @@
     "shotsTotal": 10
   },
   "targets": [
-    { "shape": "circle", "x": 150, "y": 360, "r": 18 },
+    { "shape": "circle", "x": 150, "y": 360, "r": 18, "special": true },
     { "shape": "circle", "x": 230, "y": 360, "r": 18,
       "motion": {
         "segments": [
@@ -24,6 +24,6 @@
     },
     { "shape": "rect", "x": 420, "y": 340, "width": 80, "height": 36, "angle": 12 },
     { "shape": "rect", "x": 620, "y": 320, "width": 120, "height": 28, "angle": -22 },
-    { "shape": "circle", "x": 800, "y": 360, "r": 18 }
+    { "shape": "circle", "x": 800, "y": 360, "r": 18, "special": true }
   ]
 }

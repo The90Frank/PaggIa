@@ -4,33 +4,34 @@
  * Queste custom properties sono lette da game.js (getGameStyleVars)
  * per configurare i colori del canvas senza hardcodarli nel JS.
  *
- * Supporta temi: .theme-dark (default) e .theme-light.
- *
- * VARIABILI:
- *   --game-cannon          → colore cannone (#999)
- *   --game-target          → colore target base (#0af azzurro)
- *   --game-target-hit      → colore flash quando colpito (#ff0 giallo)
+ * VARIABILI CANVAS:
+ *   --game-cannon          → colore cannone
+ *   --game-target          → colore target normali (azzurro)
+ *   --game-target-hit      → colore flash quando colpito (giallo)
+ *   --game-target-special  → colore target speciali (verde con glow)
  *   --game-preview         → colore linea preview traiettoria
  *   --game-preview-marker  → colore marker rimbalzo sulla preview
- *   --game-ball            → colore pallina (#f55 rosso)
+ *   --game-ball            → colore pallina principale (rosso)
+ *   --game-ball-extra      → colore palline extra (multiball)
  *   --game-ground          → colore linea ground
  *   --game-wall            → colore linee pareti/soffitto
- *   --game-hud             → colore testo HUD (tiri/score)
- *   --game-line-dash       → pattern tratteggio preview (6 6)
+ *   --game-hud             → colore testo HUD
+ *   --game-line-dash       → pattern tratteggio preview
  *   --game-hud-font        → font HUD
- *   --game-cannon-radius   → non usata (raggio hardcodato 14 in JS)
- *   --game-preview-marker-radius → non usata (hardcodato 6 in JS)
  *
- * USATO DA: game.html (tramite game.js)
+ * VARIABILI UI PERSONAGGI:
+ *   --char-color           → colore tematico del personaggio (settato inline per ogni btn)
  */
 
 :root{
   --game-cannon: #999;
   --game-target: #0af;
   --game-target-hit: #ff0;
+  --game-target-special: #2ecc71;
   --game-preview: rgba(255,255,255,0.6);
   --game-preview-marker: #ff8;
   --game-ball: #f55;
+  --game-ball-extra: #88aaff;
   --game-ground: #444;
   --game-wall: #666;
   --game-hud: #ddd;
@@ -38,19 +39,83 @@
   --game-line-dash: 6 6;
 
   --game-hud-font: 14px Arial, sans-serif;
-
-  --game-cannon-radius: 14px;
-  --game-preview-marker-radius: 6px;
 }
 
 /* Tema scuro (default) */
 .theme-dark { --game-target: #0af; --game-ball: #f55; }
-/* Tema chiaro (non attivo di default) */
+/* Tema chiaro */
 .theme-light { --game-target: #0077cc; --game-ball: #c33; --game-hud: #222; }
 
-/* Overlay canvas (non usato attualmente) */
-.canvas-overlay {
-  pointer-events: none;
+/* ---- Character Panel ---- */
+#characterPanel {
+  max-width: 700px;
+  margin: 12px auto 4px auto;
+}
+
+#characterPanel h3 {
+  font-size: 0.85rem;
+  color: #888;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+#characterButtons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.char-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 14px;
+  border: 2px solid #333;
+  border-radius: 8px;
+  background: #1a1a1a;
+  color: #ccc;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  min-width: 80px;
+}
+
+.char-btn:hover {
+  border-color: var(--char-color, #0af);
+  background: #222;
+  transform: translateY(-1px);
+}
+
+.char-btn.active {
+  border-color: var(--char-color, #0af);
+  background: color-mix(in srgb, var(--char-color, #0af) 15%, #1a1a1a);
+  color: #fff;
+}
+
+.char-emoji {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.char-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: inherit;
+}
+
+.char-power-name {
+  font-size: 0.7rem;
+  color: var(--char-color, #0af);
+  opacity: 0.85;
+}
+
+#characterDesc {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: #888;
+  min-height: 1.2em;
+  font-style: italic;
 }
 
 .control-group button:hover { filter:brightness(1.08); }

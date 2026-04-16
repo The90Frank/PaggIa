@@ -1,0 +1,234 @@
+{
+  "canvas": {
+    "width": 1000,
+    "height": 560
+  },
+  "params": {
+    "gravity": 980,
+    "restitution": 0.75,
+    "ballRadius": 10,
+    "defaultSpeed": 700,
+    "timeScale": 1,
+    "samples": 400,
+    "shotsTotal": 10
+  },
+  "targets": [
+    {
+      "shape": "rect",
+      "x": 380,
+      "y": 320,
+      "width": 50,
+      "height": 16,
+      "angle": -90
+    },
+    {
+      "shape": "rect",
+      "x": 365,
+      "y": 265,
+      "width": 50,
+      "height": 16,
+      "angle": -60
+    },
+    {
+      "shape": "rect",
+      "x": 325,
+      "y": 225,
+      "width": 50,
+      "height": 16,
+      "angle": -30,
+      "special": true
+    },
+    {
+      "shape": "rect",
+      "x": 270,
+      "y": 210,
+      "width": 50,
+      "height": 16,
+      "angle": 0
+    },
+    {
+      "shape": "rect",
+      "x": 215,
+      "y": 225,
+      "width": 50,
+      "height": 16,
+      "angle": 30
+    },
+    {
+      "shape": "rect",
+      "x": 175,
+      "y": 265,
+      "width": 50,
+      "height": 16,
+      "angle": 60
+    },
+    {
+      "shape": "rect",
+      "x": 160,
+      "y": 320,
+      "width": 50,
+      "height": 16,
+      "angle": 90
+    },
+    {
+      "shape": "rect",
+      "x": 620,
+      "y": 320,
+      "width": 50,
+      "height": 16,
+      "angle": 90
+    },
+    {
+      "shape": "rect",
+      "x": 635,
+      "y": 265,
+      "width": 50,
+      "height": 16,
+      "angle": 60
+    },
+    {
+      "shape": "rect",
+      "x": 675,
+      "y": 225,
+      "width": 50,
+      "height": 16,
+      "angle": 30,
+      "special": true
+    },
+    {
+      "shape": "rect",
+      "x": 730,
+      "y": 210,
+      "width": 50,
+      "height": 16,
+      "angle": 0
+    },
+    {
+      "shape": "rect",
+      "x": 785,
+      "y": 225,
+      "width": 50,
+      "height": 16,
+      "angle": -30
+    },
+    {
+      "shape": "rect",
+      "x": 825,
+      "y": 265,
+      "width": 50,
+      "height": 16,
+      "angle": -60
+    },
+    {
+      "shape": "rect",
+      "x": 840,
+      "y": 320,
+      "width": 50,
+      "height": 16,
+      "angle": -90
+    },
+    {
+      "shape": "circle",
+      "x": 500,
+      "y": 360,
+      "r": 14,
+      "special": true
+    },
+    {
+      "shape": "circle",
+      "x": 460,
+      "y": 380,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 540,
+      "y": 380,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 500,
+      "y": 410,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 320,
+      "y": 460,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 380,
+      "y": 460,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 440,
+      "y": 460,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 500,
+      "y": 460,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 560,
+      "y": 460,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 620,
+      "y": 460,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 680,
+      "y": 460,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 350,
+      "y": 500,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 410,
+      "y": 500,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 470,
+      "y": 500,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 530,
+      "y": 500,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 590,
+      "y": 500,
+      "r": 12
+    },
+    {
+      "shape": "circle",
+      "x": 650,
+      "y": 500,
+      "r": 12
+    }
+  ]
+}
